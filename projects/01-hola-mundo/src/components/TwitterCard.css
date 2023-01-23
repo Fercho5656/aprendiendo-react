@@ -4,7 +4,7 @@
   background-color: rgb(22, 24, 28);
   width: fit-content;
   color: inherit;
-  text-decoration: inherit;
+  text-decoration: none;
   display: flex;
   padding: 16px;
   gap: 0 16px;
@@ -26,6 +26,10 @@
   filter: brightness(0.9);
 }
 
+.tw-followCard-text-fullname {
+  color: #fff;
+}
+
 .tw-followCard-text-fullname:hover {
   text-decoration: underline;
 }
@@ -37,6 +41,7 @@
 
 .tw-followCard-text-username {
   color: rgb(113, 118, 123);
+  text-align: left;
 }
 
 .tw-followCard-followBtn {
