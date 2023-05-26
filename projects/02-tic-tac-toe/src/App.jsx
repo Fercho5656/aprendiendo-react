@@ -3,19 +3,20 @@ import confetti from 'canvas-confetti'
 import { useState } from 'react'
 import { TURNS } from './services/const'
 import { Square } from './components/Square'
-import { checkWinner, checkTie } from './services/board'
 import { EndgameModal } from './components/EndgameModal'
+import { checkWinner, checkTie, resetState, saveGame } from './services/board'
 
 function App() {
 
-  const [board, setBoard] = useState(Array(9).fill(null))
-  const [turn, setTurn] = useState(TURNS.X)
+  const [board, setBoard] = useState(() => JSON.parse(localStorage.getItem('board')) ?? Array(9).fill(null))
+  const [turn, setTurn] = useState(() => localStorage.getItem('turn') ?? TURNS.X)
   const [winner, setWinner] = useState(null)
 
   const resetGame = () => {
     setBoard(Array(9).fill(null))
     setTurn(TURNS.X)
     setWinner(null)
+    resetState()
   }
 
   const updateBoard = (index) => {
@@ -27,6 +28,8 @@ function App() {
 
     const newTurn = turn === TURNS.X ? TURNS.O : TURNS.X
     setTurn(newTurn)
+
+    saveGame(newBoard, newTurn)
 
     const newWinner = checkWinner(newBoard)
     if (newWinner) {
