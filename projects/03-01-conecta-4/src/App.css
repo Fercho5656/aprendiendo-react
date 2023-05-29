@@ -1,0 +1,35 @@
+.board {
+  width: fit-content;
+  margin: auto;
+  text-align: center;
+}
+
+.board button {
+  padding: 8px 12px;
+  margin: 16px;
+  background: transparent;
+  border: 2px solid #eee;
+  color: #eee;
+  width: 75px;
+  border-radius: 5px;
+  transition: 0.2s;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+}
+
+.game {
+  display: grid; 
+  grid-template-columns: repeat(7, 1fr); 
+}
+
+.square {
+  width: 75px;
+  height: 75px;
+  border: 2px solid #eee;
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 32px;
+}
