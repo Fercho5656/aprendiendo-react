@@ -6,10 +6,9 @@ import { Square } from './components/Square'
 import { EndgameModal } from './components/EndgameModal'
 import { checkWinner, checkTie, resetState, saveGame } from './services/board'
 
-function App() {
-
-  const [board, setBoard] = useState(() => JSON.parse(localStorage.getItem('board')) ?? Array(9).fill(null))
-  const [turn, setTurn] = useState(() => localStorage.getItem('turn') ?? TURNS.X)
+function App () {
+  const [board, setBoard] = useState(() => JSON.parse(window.localStorage.getItem('board')) ?? Array(9).fill(null))
+  const [turn, setTurn] = useState(() => window.localStorage.getItem('turn') ?? TURNS.X)
   const [winner, setWinner] = useState(null)
 
   const resetGame = () => {

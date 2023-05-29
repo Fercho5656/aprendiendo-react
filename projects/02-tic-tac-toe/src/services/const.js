@@ -1,6 +1,6 @@
 export const TURNS = {
   X: '❌',
-  O: '⭕',
+  O: '⭕'
 }
 
 export const WINNING_COMBINATIONS = [
@@ -11,5 +11,5 @@ export const WINNING_COMBINATIONS = [
   [1, 4, 7], // middle column
   [2, 5, 8], // right column
   [0, 4, 8], // diagonal top left to bottom right
-  [2, 4, 6], // diagonal top right to bottom left
+  [2, 4, 6] // diagonal top right to bottom left
 ]

@@ -18,11 +18,11 @@ export const checkWinner = (boardToCheck) => {
 export const checkTie = (boardToCheck) => boardToCheck.every(square => square !== null)
 
 export const saveGame = (boardToSave, turn) => {
-  localStorage.setItem('board', JSON.stringify(boardToSave))
-  localStorage.setItem('turn', turn)
+  window.localStorage.setItem('board', JSON.stringify(boardToSave))
+  window.localStorage.setItem('turn', turn)
 }
 
 export const resetState = () => {
-  localStorage.removeItem('board')
-  localStorage.removeItem('turn')
+  window.localStorage.removeItem('board')
+  window.localStorage.removeItem('turn')
 }
