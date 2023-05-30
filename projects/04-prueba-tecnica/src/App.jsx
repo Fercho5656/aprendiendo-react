@@ -1,35 +1,37 @@
 import { useEffect, useState } from 'react'
+import { fetchNewFact, fetchCatImg } from './services/api'
+import { RANDOM_IMG_API_PREFIX } from './services/const'
 import './style.css'
 
 function App () {
-  const RANDOM_FACT_API = 'https://catfact.ninja/fact'
-  const RANDOM_IMG_API = 'https://cataas.com/cat/says/'
-  const RANDOM_IMG_API_PREFIX = 'https://cataas.com'
-
   const [fact, setFact] = useState('')
   const [imgUrl, setImgUrl] = useState('')
 
+  const onNewFact = async () => {
+    const fact = await fetchNewFact()
+    setFact(fact)
+  }
+
   // fetch random cat fact
   useEffect(() => {
-    fetch(RANDOM_FACT_API)
-      .then(res => res.json())
-      .then(({ fact }) => setFact(fact.split(' ', 1).join(' ')))
+    fetchNewFact().then(fact => setFact(fact))
   }, [])
 
   // fetch random cat image
   useEffect(() => {
     if (!fact) return
-    fetch(`${RANDOM_IMG_API}${fact}?json=true`)
-      .then(res => res.json())
-      .then(({ url }) => setImgUrl(`${RANDOM_IMG_API_PREFIX}${url}`))
+    fetchCatImg(fact).then(url => setImgUrl(url))
   }, [fact])
 
   return (
     <main>
-      <h1>Random Cat Fact</h1>
+      <header>
+        <h1>Random Cat Fact</h1>
+        <button onClick={onNewFact}>Show new fact</button>
+      </header>
       <section>
         <p>{fact}</p>
-        {imgUrl && <img src={imgUrl} alt='Cat image fetched from CATAAS API' />}
+        {imgUrl && <img src={`${RANDOM_IMG_API_PREFIX}${imgUrl}`} alt='Cat image fetched from CATAAS API' />}
       </section>
     </main>
   )
