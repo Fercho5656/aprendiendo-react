@@ -103,6 +103,14 @@ main {
   min-height: 100vh;
 }
 
+main header {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
 main section {
   display: flex;
   font-size: 32px;
