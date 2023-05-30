@@ -1,27 +1,10 @@
-import { useEffect, useState } from 'react'
-import { fetchNewFact, fetchCatImg } from './services/api'
-import { RANDOM_IMG_API_PREFIX } from './services/const'
+import useCatImg from './hooks/useCatImg'
+import useFact from './hooks/useFact'
 import './style.css'
 
 function App () {
-  const [fact, setFact] = useState('')
-  const [imgUrl, setImgUrl] = useState('')
-
-  const onNewFact = async () => {
-    const fact = await fetchNewFact()
-    setFact(fact)
-  }
-
-  // fetch random cat fact
-  useEffect(() => {
-    fetchNewFact().then(fact => setFact(fact))
-  }, [])
-
-  // fetch random cat image
-  useEffect(() => {
-    if (!fact) return
-    fetchCatImg(fact).then(url => setImgUrl(url))
-  }, [fact])
+  const { fact, onNewFact } = useFact()
+  const { imgUrl } = useCatImg({ fact })
 
   return (
     <main>
@@ -31,7 +14,7 @@ function App () {
       </header>
       <section>
         <p>{fact}</p>
-        {imgUrl && <img src={`${RANDOM_IMG_API_PREFIX}${imgUrl}`} alt='Cat image fetched from CATAAS API' />}
+        {imgUrl && <img src={imgUrl} alt='Cat image fetched from CATAAS API' />}
       </section>
     </main>
   )
