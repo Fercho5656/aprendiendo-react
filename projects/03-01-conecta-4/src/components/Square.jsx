@@ -1,9 +1,12 @@
-export const Square = ({ children, col, row, handleClick }) => {
+export const Square = ({ children, index, isSelected, handleClick }) => {
+  const className = `square ${isSelected ? 'is-selected' : ''}`
+
   const updateBoard = () => {
-    handleClick(col, row)
+    handleClick(index)
   }
+
   return (
-    <button className='square' onClick={updateBoard}>
+    <button className={className} onClick={updateBoard}>
       {children}
     </button>
   )

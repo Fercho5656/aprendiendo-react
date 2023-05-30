@@ -4,13 +4,17 @@
   text-align: center;
 }
 
+.board h1 {
+  margin: 16px;
+}
+
 .board button {
   padding: 8px 12px;
-  margin: 16px;
+  margin: 8px;
   background: transparent;
   border: 2px solid #eee;
   color: #eee;
-  width: 75px;
+  width: 64px;
   border-radius: 5px;
   transition: 0.2s;
   font-weight: bold;
@@ -24,12 +28,58 @@
 }
 
 .square {
-  width: 75px;
-  height: 75px;
+  width: 64px;
+  height: 64px;
   border: 2px solid #eee;
   border-radius: 5px;
   display: grid;
   place-items: center;
   cursor: pointer;
-  font-size: 32px;
+  font-size: 24px;
+}
+
+.turn {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: fit-content;
+  position: relative;
+  border-radius: 10px;
+}
+.square.is-selected {
+  color: #fff;
+  background: #09f;
+}
+
+.winner {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.winner .text {
+  background: #111;
+  height: 300px;
+  width: 320px;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.winner .win {
+  margin: 0 auto;
+  width: fit-content;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  display: flex;
+  gap: 15px;
 }

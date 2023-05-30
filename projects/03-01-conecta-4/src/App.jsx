@@ -1,48 +1,70 @@
 import { Square } from './components/Square'
 import { TURNS } from './services/consts'
 import { useState } from 'react'
+import { checkDraw, checkWinner } from './services/board'
 import './App.css'
+import { EndgameModal } from './components/EndgameModal'
 
 function App () {
-  const [board, setBoard] = useState(Array.from({ length: 7 }, () => Array(6).fill(null)))
+  const [board, setBoard] = useState(Array(42).fill(null))
   const [turn, setTurn] = useState(TURNS.x)
+  const [winner, setWinner] = useState(null)
 
-  const updateBoard = (col, row) => {
+  const updateBoard = (index) => {
+    if (winner) return
+
     const newBoard = [...board]
+    const col = index % 7
 
-    for (let i = newBoard[col].length - 1; i >= 0; i--) {
-      if (newBoard[col][i] === null) {
-        newBoard[col][i] = turn
+    // Fills the last empty square in the column
+    for (let i = 6; i >= 0; i--) {
+      if (newBoard[col + i * 7] === null) {
+        newBoard[col + i * 7] = turn
         break
       }
+    }
+
+    // Check for winner
+    const newWinner = checkWinner(newBoard)
+    if (newWinner) {
+      return setWinner(newWinner)
+    }
+
+    if (checkDraw(newBoard)) {
+      setWinner(false)
     }
 
     setTurn(turn === TURNS.x ? TURNS.o : TURNS.x)
     setBoard(newBoard)
   }
 
+  const resetGame = () => {
+    setBoard(Array(42).fill(null))
+    setTurn(TURNS.x)
+    setWinner(null)
+  }
+
   return (
     <>
-      <div className='board'>
+      <main className='board'>
         <h1>Connect 4</h1>
-        <div className='game'>
-          {
-            board.map((col, i) => {
-              return (
-                <div className='col' key={i}>
-                  {col.map((cell, j) => {
-                    return (
-                      <Square key={`${j}`} col={i} row={j} handleClick={updateBoard}>
-                        {board[i][j]}
-                      </Square>
-                    )
-                  })}
-                </div>
-              )
-            })
-          }
-        </div>
-      </div>
+        <section className='game'>
+          {board.map((col, i) => (
+            <Square key={i} index={i} handleClick={updateBoard}>
+              {col}
+            </Square>
+          ))}
+        </section>
+        <section className='turn'>
+          <Square isSelected={turn === TURNS.x}>
+            {TURNS.x}
+          </Square>
+          <Square isSelected={turn === TURNS.o}>
+            {TURNS.o}
+          </Square>
+        </section>
+        <EndgameModal winner={winner} resetGame={resetGame} />
+      </main>
     </>
   )
 }
