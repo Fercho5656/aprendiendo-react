@@ -10,10 +10,11 @@ export default function Movies ({ movies }) {
 
 const MoviesList = ({ movies }) => {
   return (
-    <ul>
+    <ul className='movies'>
       {movies.map(movie => (
-        <li key={movie.id}>
-          <p>{movie.title} - {movie.year}</p>
+        <li className='movie' key={movie.id}>
+          <p className='movie-title'>{movie.title}</p>
+          <p className='movie-year'>{movie.year}</p>
           <img src={movie.poster} alt={movie.title} />
         </li>
       ))}

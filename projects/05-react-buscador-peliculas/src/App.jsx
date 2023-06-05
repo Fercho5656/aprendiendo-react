@@ -21,7 +21,7 @@ function App () {
   }
 
   return (
-    <div>
+    <div className='page'>
       <h1>Buscador de Películas</h1>
       <header>
         <form onSubmit={handleSubmit}>
